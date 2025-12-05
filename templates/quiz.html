@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회계 O/X 퀴즈</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .question-box {
+            background-color: #e9ecef;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-text {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .options label {
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        .options input[type="radio"] {
+            margin-right: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>회계 O/X 퀴즈 (총 10문제)</h1>
+        <p>정답을 선택하고 제출해주세요.</p>
+        
+        <form action="/submit" method="POST">
+            {% for q in questions %}
+            <div class="question-box">
+                <p class="question-text">{{ q.id }}. {{ q.question }}</p>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="q{{ q.id }}" value="O" required> O
+                    </label>
+                    <label>
+                        <input type="radio" name="q{{ q.id }}" value="X" required> X
+                    </label>
+                </div>
+            </div>
+            {% endfor %}
+
+            <button type="submit">정답 제출하기</button>
+        </form>
+    </div>
+</body>
+</html>
