@@ -1,0 +1,2 @@
+Flask
+gunicorn  # Render 서버를 구동하기 위한 필수 웹 서버 게이트웨이 인터페이스
