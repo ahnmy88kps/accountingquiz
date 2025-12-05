@@ -17,52 +17,93 @@
             background: #fff;
             padding: 20px 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         h1 {
             color: #007bff;
             text-align: center;
             border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
         .question-box {
-            background-color: #e9ecef;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 5px;
+            background-color: #f9f9f9; /* 배경색을 밝게 변경 */
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
         }
         .question-text {
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-weight: bold;
-            margin-bottom: 10px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.5;
         }
-        .options label {
-            margin-right: 20px;
-            cursor: pointer;
+        .options {
+            display: flex;
+            gap: 20px; /* 버튼 사이 간격 추가 */
         }
+        
+        /* 💡 O/X 버튼 디자인 핵심 CSS */
         .options input[type="radio"] {
-            margin-right: 5px;
+            /* 기본 라디오 버튼 숨기기 */
+            display: none;
         }
-        button {
+        
+        .options label {
+            /* 라벨을 버튼처럼 보이게 스타일링 */
+            flex-grow: 1; /* 가용한 공간을 균등하게 채우도록 설정 */
+            text-align: center;
+            padding: 15px 10px;
+            font-size: 1.5em; /* 폰트 크게 */
+            font-weight: bold;
+            cursor: pointer;
+            border: 3px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            color: #333;
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* 호버 시 스타일 */
+        .options label:hover {
+            border-color: #007bff;
+            background-color: #eaf3ff;
+            color: #007bff;
+        }
+
+        /* 선택되었을 때 스타일 */
+        .options input[type="radio"]:checked + label {
+            background-color: #007bff; /* 선택 시 파란색 배경 */
+            color: white; /* 흰색 글자 */
+            border-color: #007bff;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+            transform: translateY(-2px); /* 약간 입체감 주기 */
+        }
+        /* ---------------------------------- */
+
+        button[type="submit"] {
             display: block;
             width: 100%;
-            padding: 10px;
+            padding: 12px;
+            margin-top: 10px;
             background-color: #28a745;
             color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 1.1em;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        button:hover {
+        button[type="submit"]:hover {
             background-color: #218838;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>회계 O/X 퀴즈 (총 10문제)</h1>
+        <h1>회계 O/X 퀴즈 (총 {{ questions|length }}문제)</h1>
         <p>정답을 선택하고 제출해주세요.</p>
         
         <form action="/submit" method="POST">
@@ -70,12 +111,11 @@
             <div class="question-box">
                 <p class="question-text">{{ q.id }}. {{ q.question }}</p>
                 <div class="options">
-                    <label>
-                        <input type="radio" name="q{{ q.id }}" value="O" required> O
-                    </label>
-                    <label>
-                        <input type="radio" name="q{{ q.id }}" value="X" required> X
-                    </label>
+                    <input type="radio" id="q{{ q.id }}_o" name="q{{ q.id }}" value="O" required>
+                    <label for="q{{ q.id }}_o">O</label>
+                    
+                    <input type="radio" id="q{{ q.id }}_x" name="q{{ q.id }}" value="X" required>
+                    <label for="q{{ q.id }}_x">X</label>
                 </div>
             </div>
             {% endfor %}
