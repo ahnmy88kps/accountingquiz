@@ -83,7 +83,7 @@ def submit_quiz():
         })
         
         if is_correct:
-            score += 1
+            score += 10
 
     return render_template('results.html', score=score, total=len(QUIZ_QUESTIONS), results=results)
 
@@ -91,4 +91,5 @@ if __name__ == '__main__':
     # Flask 앱을 실행합니다.
 
      app.run(debug=True, port=5001, use_reloader=False)
+
 
