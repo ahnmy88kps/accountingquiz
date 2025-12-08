@@ -22,7 +22,7 @@ QUIZ_QUESTIONS = [
     },
     {
         "id": 4,
-        "question": "개인카드 영수증도 회사 전표처리의 적격증빙이다.",
+        "question": "회의비를 법인카드 대신 결제한 개인카드 영수증도 회사 전표처리의 적격증빙이다.",
         "answer": "X",
     },
     {
@@ -43,7 +43,7 @@ QUIZ_QUESTIONS = [
     },
     {
         "id": 8,
-        "question": "모든 경상 임차 사옥은 사용권자산으로 인식하여야 하며, 회계장부상 임차료를 인식하지 않는다.",
+        "question": "경상 임차 사옥(소액리스 제외)은 사용권자산으로 인식하여야 하며, 회계장부상 임차료를 인식하지 않는다.",
         "answer": "O", 
     },
     {
@@ -91,6 +91,7 @@ if __name__ == '__main__':
     # Flask 앱을 실행합니다.
 
      app.run(debug=True, port=5001, use_reloader=False)
+
 
 
 
